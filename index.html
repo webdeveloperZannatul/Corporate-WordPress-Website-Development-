@@ -1,0 +1,721 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexCorp | Strategic Business Solutions</title>
+    
+    <!-- Google Fonts: Inter & Playfair Display for that Corporate/Premium feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6', // Primary Blue
+                            600: '#2563eb',
+                            800: '#1e40af', // Dark Navy
+                            900: '#0f172a', 
+                        },
+                        accent: {
+                            500: '#0ea5e9', // Light Blue Cyan
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles that Tailwind Utility classes might miss */
+        body {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(90deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.7) 50%, rgba(15, 23, 42, 0.3) 100%);
+        }
+
+        .clip-path-slant {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        /* Smooth hover for cards */
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Sticky Header Glass Effect */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+        }
+        
+        /* Mobile Menu Transition */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-600 antialiased bg-white selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 glass-nav py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 bg-brand-800 rounded-lg flex items-center justify-center text-white font-bold text-xl">N</div>
+                    <span class="font-serif text-2xl font-bold text-brand-800 tracking-tight">NexCorp</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-slate-600 hover:text-brand-600 font-medium transition">Home</a>
+                    <a href="#about" class="text-slate-600 hover:text-brand-600 font-medium transition">About</a>
+                    <a href="#services" class="text-slate-600 hover:text-brand-600 font-medium transition">Services</a>
+                    <a href="#portfolio" class="text-slate-600 hover:text-brand-600 font-medium transition">Work</a>
+                    <a href="#blog" class="text-slate-600 hover:text-brand-600 font-medium transition">Insights</a>
+                    <a href="#contact" class="px-6 py-2.5 bg-brand-800 text-white font-medium rounded-full hover:bg-brand-600 transition shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                        Get in Touch
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-brand-800 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 pt-2 pb-6 space-y-2 shadow-xl">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-brand-50">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-brand-50">About Us</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-brand-50">Services</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-brand-50">Case Studies</a>
+                <a href="#contact" class="block mt-4 px-4 py-3 text-center rounded-lg font-bold bg-brand-800 text-white">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <!-- Background Image with Parallax Effect logic (simulated via fixed attachment in a real WP theme, here via absolute) -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://cdn.prod.website-files.com/601d611d601043ab3e22931b/696934d0918aca965f0794b0_AdobeStock_1842512702%201.webp?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" alt="Corporate Office" class="w-full h-full object-cover">
+            <div class="hero-overlay absolute inset-0 opacity-90"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left w-full">
+            <div class="md:w-2/3" data-aos="fade-up" data-aos-duration="1000">
+                <span class="inline-block py-1 px-3 rounded-full bg-brand-500/20 border border-brand-400/30 text-brand-100 text-sm font-semibold mb-6 backdrop-blur-sm">
+                    Innovation • Strategy • Growth
+                </span>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-tight mb-6">
+                    Shaping the Future of <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-200 to-white">Enterprise Solutions</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed">
+                    We help visionary companies scale through digital transformation, strategic consulting, and world-class implementation.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#services" class="px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-lg transition shadow-lg shadow-brand-500/30 text-center">
+                        Our Services
+                    </a>
+                    <a href="#contact" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-md font-bold rounded-lg transition text-center">
+                        Schedule Consultation
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/50">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="relative" data-aos="fade-right">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-brand-100 rounded-full z-0"></div>
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80" alt="About Team" class="relative z-10 rounded-2xl shadow-2xl">
+                    <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-brand-800 rounded-2xl -z-0 hidden md:block opacity-10"></div>
+                    
+                    <!-- Floating Stats Card -->
+                    <div class="absolute bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl z-20 hidden sm:block">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-brand-50 rounded-full flex items-center justify-center text-brand-600">
+                                <i class="fas fa-trophy text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-brand-900">15+</p>
+                                <p class="text-sm font-medium text-slate-500">Years Experience</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div data-aos="fade-left">
+                    <h2 class="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-2">About NexCorp</h2>
+                    <h3 class="text-4xl font-serif font-bold text-brand-900 mb-6">We are a team of visionary experts dedicated to your success.</h3>
+                    <p class="text-slate-600 mb-6 leading-relaxed">
+                        Founded on the principles of integrity and innovation, NexCorp has grown from a small consultancy to a global powerhouse. We don't just provide services; we build partnerships that drive measurable results.
+                    </p>
+                    <p class="text-slate-600 mb-8 leading-relaxed">
+                        Our approach combines data-driven insights with creative boldness, ensuring your business stays ahead of the curve in an ever-evolving marketplace.
+                    </p>
+
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-brand-500"></i>
+                            <span class="font-medium text-slate-700">Certified Industry Experts</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-brand-500"></i>
+                            <span class="font-medium text-slate-700">24/7 Global Support Infrastructure</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-check-circle text-brand-500"></i>
+                            <span class="font-medium text-slate-700">Proven ROI-Based Methodologies</span>
+                        </li>
+                    </ul>
+
+                    <a href="#contact" class="text-brand-600 font-bold hover:text-brand-800 border-b-2 border-brand-600 hover:border-brand-800 pb-1 transition">
+                        Learn More About Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                <h2 class="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-2">Our Expertise</h2>
+                <h3 class="text-3xl md:text-4xl font-serif font-bold text-brand-900 mb-4">Comprehensive Solutions for Modern Business</h3>
+                <p class="text-slate-600">From strategy to execution, we cover every aspect of your digital journey.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-brand-500/10" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-brand-600 text-2xl mb-6">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-brand-900 mb-3">Business Strategy</h4>
+                    <p class="text-slate-600 mb-4">Data-driven roadmaps that align your operations with long-term growth goals.</p>
+                    <a href="#" class="text-sm font-bold text-brand-600 hover:text-brand-800 flex items-center gap-2">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-brand-500/10" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-brand-600 text-2xl mb-6">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-brand-900 mb-3">Digital Development</h4>
+                    <p class="text-slate-600 mb-4">Full-stack web and mobile application development using cutting-edge tech.</p>
+                    <a href="#" class="text-sm font-bold text-brand-600 hover:text-brand-800 flex items-center gap-2">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-brand-500/10" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-brand-600 text-2xl mb-6">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-brand-900 mb-3">Marketing & SEO</h4>
+                    <p class="text-slate-600 mb-4">Increase visibility and convert traffic with our organic and paid campaigns.</p>
+                    <a href="#" class="text-sm font-bold text-brand-600 hover:text-brand-800 flex items-center gap-2">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-brand-500/10" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-brand-600 text-2xl mb-6">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-brand-900 mb-3">Cyber Security</h4>
+                    <p class="text-slate-600 mb-4">Protecting your assets with enterprise-grade security protocols.</p>
+                    <a href="#" class="text-sm font-bold text-brand-600 hover:text-brand-800 flex items-center gap-2">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-brand-500/10" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-brand-600 text-2xl mb-6">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-brand-900 mb-3">Cloud Solutions</h4>
+                    <p class="text-slate-600 mb-4">Scalable cloud infrastructure management and migration services.</p>
+                    <a href="#" class="text-sm font-bold text-brand-600 hover:text-brand-800 flex items-center gap-2">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card bg-white p-8 rounded-2xl shadow-sm hover:shadow-brand-500/10" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-14 h-14 bg-brand-100 rounded-xl flex items-center justify-center text-brand-600 text-2xl mb-6">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-brand-900 mb-3">IT Consulting</h4>
+                    <p class="text-slate-600 mb-4">Expert advice to modernize your IT landscape and improve efficiency.</p>
+                    <a href="#" class="text-sm font-bold text-brand-600 hover:text-brand-800 flex items-center gap-2">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-brand-800 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                <div data-aos="zoom-in">
+                    <p class="text-4xl md:text-5xl font-bold text-brand-300 mb-2">500+</p>
+                    <p class="text-brand-100 font-medium">Projects Delivered</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="100">
+                    <p class="text-4xl md:text-5xl font-bold text-brand-300 mb-2">98%</p>
+                    <p class="text-brand-100 font-medium">Client Retention</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="200">
+                    <p class="text-4xl md:text-5xl font-bold text-brand-300 mb-2">15+</p>
+                    <p class="text-brand-100 font-medium">Years Experience</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="300">
+                    <p class="text-4xl md:text-5xl font-bold text-brand-300 mb-2">50+</p>
+                    <p class="text-brand-100 font-medium">Awards Won</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio / Case Studies -->
+    <section id="portfolio" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div data-aos="fade-right">
+                    <h2 class="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-2">Case Studies</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-brand-900">Our Recent Work</h3>
+                </div>
+                <a href="#" class="hidden md:inline-block px-6 py-3 border border-brand-200 text-brand-600 rounded-lg hover:bg-brand-50 transition font-medium">View All Projects</a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="group cursor-pointer" data-aos="fade-up">
+                    <div class="relative overflow-hidden rounded-2xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Project 1" class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-brand-900/0 group-hover:bg-brand-900/80 transition duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                            <span class="text-white font-bold border-b border-white pb-1">View Case Study</span>
+                        </div>
+                    </div>
+                    <span class="text-brand-600 text-sm font-semibold uppercase">Finance Tech</span>
+                    <h4 class="text-xl font-bold text-brand-900">FinTech Dashboard Redesign</h4>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative overflow-hidden rounded-2xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Project 2" class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-brand-900/0 group-hover:bg-brand-900/80 transition duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                            <span class="text-white font-bold border-b border-white pb-1">View Case Study</span>
+                        </div>
+                    </div>
+                    <span class="text-brand-600 text-sm font-semibold uppercase">Consulting</span>
+                    <h4 class="text-xl font-bold text-brand-900">Enterprise Resource Planning</h4>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="group cursor-pointer" data-aos="fade-up">
+                    <div class="relative overflow-hidden rounded-2xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Project 3" class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-brand-900/0 group-hover:bg-brand-900/80 transition duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                            <span class="text-white font-bold border-b border-white pb-1">View Case Study</span>
+                        </div>
+                    </div>
+                    <span class="text-brand-600 text-sm font-semibold uppercase">Data Analytics</span>
+                    <h4 class="text-xl font-bold text-brand-900">Global Retail Analytics</h4>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative overflow-hidden rounded-2xl mb-4">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Project 4" class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-brand-900/0 group-hover:bg-brand-900/80 transition duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                            <span class="text-white font-bold border-b border-white pb-1">View Case Study</span>
+                        </div>
+                    </div>
+                    <span class="text-brand-600 text-sm font-semibold uppercase">Automation</span>
+                    <h4 class="text-xl font-bold text-brand-900">Automated Logistics System</h4>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                <a href="#" class="px-6 py-3 border border-brand-200 text-brand-600 rounded-lg hover:bg-brand-50 transition font-medium">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-center text-brand-900 mb-16">Trusted by Industry Leaders</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg relative" data-aos="fade-up">
+                    <i class="fas fa-quote-right absolute top-8 right-8 text-4xl text-brand-100"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-12 h-12 rounded-full">
+                        <div>
+                            <h5 class="font-bold text-brand-900">Michael Ross</h5>
+                            <p class="text-xs text-slate-500">CEO, TechFlow</p>
+                        </div>
+                        <div class="ml-auto text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 italic">"NexCorp transformed our digital presence. Their team is responsive, professional, and deeply knowledgeable. ROI was achieved in 3 months."</p>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg relative" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-quote-right absolute top-8 right-8 text-4xl text-brand-100"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-12 h-12 rounded-full">
+                        <div>
+                            <h5 class="font-bold text-brand-900">Sarah Jenkins</h5>
+                            <p class="text-xs text-slate-500">Director, Global Health</p>
+                        </div>
+                        <div class="ml-auto text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 italic">"The strategy proposed was exactly what we needed. Clean execution, beautiful design, and seamless implementation. Highly recommended."</p>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg relative" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-quote-right absolute top-8 right-8 text-4xl text-brand-100"></i>
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="User" class="w-12 h-12 rounded-full">
+                        <div>
+                            <h5 class="font-bold text-brand-900">David Chen</h5>
+                            <p class="text-xs text-slate-500">CTO, InnovateX</p>
+                        </div>
+                        <div class="ml-auto text-yellow-400 text-xs">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-slate-600 italic">"They don't just write code; they understand business logic. The cloud migration went flawlessly."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-brand-600">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white font-serif mb-6">Ready to transform your business?</h2>
+            <p class="text-brand-100 mb-10 max-w-2xl mx-auto">Schedule a free discovery call today and let's discuss how we can help you achieve your strategic goals.</p>
+            <button class="bg-white text-brand-600 font-bold py-4 px-10 rounded-full hover:bg-brand-50 transition shadow-lg hover:shadow-xl hover:-translate-y-1">
+                Book Free Consultation
+            </button>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-2">Latest Insights</h2>
+                <h3 class="text-3xl md:text-4xl font-serif font-bold text-brand-900">From the Blog</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Blog 1 -->
+                <article class="flex flex-col group" data-aos="fade-up">
+                    <div class="overflow-hidden rounded-xl mb-5 relative">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog 1" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-4 left-4 bg-white px-3 py-1 text-xs font-bold rounded shadow">Tech Trends</span>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-sm text-slate-400 mb-2">Oct 12, 2023 • 5 min read</div>
+                        <h4 class="text-xl font-bold text-brand-900 mb-3 group-hover:text-brand-600 transition">The Future of AI in Corporate Governance</h4>
+                        <p class="text-slate-600 text-sm mb-4 line-clamp-3">Artificial Intelligence is reshaping how corporations make decisions. Here is what you need to know about the ethical implications and efficiency gains.</p>
+                        <a href="#" class="text-brand-600 font-bold text-sm hover:underline">Read More</a>
+                    </div>
+                </article>
+
+                <!-- Blog 2 -->
+                <article class="flex flex-col group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="overflow-hidden rounded-xl mb-5 relative">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog 2" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-4 left-4 bg-white px-3 py-1 text-xs font-bold rounded shadow">Leadership</span>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-sm text-slate-400 mb-2">Sep 28, 2023 • 3 min read</div>
+                        <h4 class="text-xl font-bold text-brand-900 mb-3 group-hover:text-brand-600 transition">Remote Teams: Management Best Practices</h4>
+                        <p class="text-slate-600 text-sm mb-4 line-clamp-3">Managing a remote workforce requires a different set of skills. Discover the tools and strategies top CEOs use to keep their teams aligned.</p>
+                        <a href="#" class="text-brand-600 font-bold text-sm hover:underline">Read More</a>
+                    </div>
+                </article>
+
+                <!-- Blog 3 -->
+                <article class="flex flex-col group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="overflow-hidden rounded-xl mb-5 relative">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Blog 3" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-4 left-4 bg-white px-3 py-1 text-xs font-bold rounded shadow">Finance</span>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-sm text-slate-400 mb-2">Sep 15, 2023 • 6 min read</div>
+                        <h4 class="text-xl font-bold text-brand-900 mb-3 group-hover:text-brand-600 transition">Quarterly Market Analysis: Q3 Report</h4>
+                        <p class="text-slate-600 text-sm mb-4 line-clamp-3">A deep dive into the financial trends observed in the technology sector during the third quarter of this fiscal year.</p>
+                        <a href="#" class="text-brand-600 font-bold text-sm hover:underline">Read More</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (Get In Touch) -->
+    <section id="contact" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                
+                <!-- Contact Form -->
+                <div data-aos="fade-right">
+                    <h2 class="text-brand-600 font-semibold tracking-wide uppercase text-sm mb-2">Contact Us</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-brand-900 mb-6">Let's Discuss Your Project</h3>
+                    <p class="text-slate-600 mb-8">Fill out the form below and our team will get back to you within 24 hours.</p>
+
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">First Name</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-1">Last Name</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition" placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Subject</label>
+                            <select class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition bg-white">
+                                <option>General Inquiry</option>
+                                <option>Consultation</option>
+                                <option>Career</option>
+                                <option>Support</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Message</label>
+                            <textarea rows="5" class="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition" placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-800 text-white font-bold py-4 rounded-lg hover:bg-brand-900 transition shadow-lg">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info & Map -->
+                <div data-aos="fade-left">
+                    <div class="bg-white p-8 rounded-2xl shadow-xl mb-8">
+                        <h4 class="text-xl font-bold text-brand-900 mb-6">Office Locations</h4>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-brand-900">Headquarters (USA)</h5>
+                                    <p class="text-slate-500 text-sm mt-1">123 Corporate Blvd, Suite 400<br>New York, NY 10001</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 flex-shrink-0">
+                                    <i class="fas fa-phone-alt text-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-brand-900">Phone</h5>
+                                    <p class="text-slate-500 text-sm mt-1">+1 (555) 123-4567</p>
+                                    <p class="text-slate-500 text-sm">Mon-Fri 9am-6pm EST</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 flex-shrink-0">
+                                    <i class="fas fa-envelope text-lg"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-brand-900">Email</h5>
+                                    <p class="text-slate-500 text-sm mt-1">hello@nexcorp-demo.com</p>
+                                    <p class="text-slate-500 text-sm">support@nexcorp-demo.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map Embed -->
+                    <div class="h-80 w-full rounded-2xl overflow-hidden shadow-lg">
+                         <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1422937950147!2d-73.98731968482413!3d40.75889497932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1622567891234!5m2!1sen!2sus" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-900 text-white pt-20 pb-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-brand-900 font-bold text-xl">N</div>
+                        <span class="font-serif text-2xl font-bold tracking-tight">NexCorp</span>
+                    </div>
+                    <p class="text-brand-200 text-sm leading-relaxed mb-6">
+                        Empowering businesses with innovative strategies and seamless digital solutions for a better tomorrow.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-600 transition"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-600 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-600 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-600 transition"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white">Company</h4>
+                    <ul class="space-y-3 text-brand-200 text-sm">
+                        <li><a href="#about" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#services" class="hover:text-white transition">Services</a></li>
+                        <li><a href="#portfolio" class="hover:text-white transition">Case Studies</a></li>
+                        <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition">Partners</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white">Services</h4>
+                    <ul class="space-y-3 text-brand-200 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Consulting</a></li>
+                        <li><a href="#" class="hover:text-white transition">IT Management</a></li>
+                        <li><a href="#" class="hover:text-white transition">Cloud Integration</a></li>
+                        <li><a href="#" class="hover:text-white transition">Cybersecurity</a></li>
+                        <li><a href="#" class="hover:text-white transition">Digital Marketing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-white">Newsletter</h4>
+                    <p class="text-brand-200 text-sm mb-4">Subscribe to get the latest industry insights.</p>
+                    <form class="flex flex-col gap-3">
+                        <input type="email" placeholder="Enter your email" class="px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-brand-300 focus:outline-none focus:bg-white/20 transition">
+                        <button class="px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-lg transition">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-brand-300">
+                <p>&copy; 2026 NexCorp Inc. All rights reserved Developed by Zannatul.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animate On Scroll
+        AOS.init({
+            once: true,
+            offset: 100,
+            duration: 800,
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('open');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('open');
+            });
+        });
+
+        // Sticky Header Background Change on Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+            }
+        });
+    </script>
+</body>
+</html>
